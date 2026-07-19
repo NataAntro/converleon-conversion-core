@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  swift:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift version
+        run: swift --version
+      - name: Format lint
+        run: swift format lint --configuration .swift-format --recursive Sources Tests Package.swift
+      - name: Build all products
+        run: swift build
+      - name: Tests and coverage gate
+        run: bash scripts/check-coverage.sh
