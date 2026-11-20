@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="500" viewBox="0 0 1160 500" role="img" aria-labelledby="title desc">
+  <title id="title">Архитектура безопасной конвертации</title>
+  <desc id="desc">Поток от локального файла через определение типа, координатор, стратегию, резервирование и временную область к атомарному результату.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#172554"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#67e8f9"/>
+    </marker>
+    <style>
+      .title { font: 700 28px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f8fafc; }
+      .subtitle { font: 400 15px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #cbd5e1; }
+      .box-title { font: 700 17px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f8fafc; }
+      .box-text { font: 400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #cbd5e1; }
+      .tag { font: 600 12px ui-monospace, SFMono-Regular, Menlo, monospace; fill: #a5f3fc; }
+      .flow { stroke: #67e8f9; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1160" height="500" rx="24" fill="url(#background)"/>
+  <text x="52" y="58" class="title">Безопасная файловая конвертация</text>
+  <text x="52" y="86" class="subtitle">Swift-ядро: уникальный путь, изолированная временная область и атомарная финализация</text>
+
+  <g filter="url(#shadow)">
+    <rect x="52" y="145" width="180" height="126" rx="16" fill="#1e293b" stroke="#475569"/>
+    <text x="72" y="178" class="box-title">Локальный файл</text>
+    <text x="72" y="207" class="box-text">Файл пользователя</text>
+    <text x="72" y="230" class="tag">URL + UTType</text>
+  </g>
+
+  <path d="M232 208 H260" class="flow"/>
+
+  <g filter="url(#shadow)">
+    <rect x="270" y="124" width="244" height="168" rx="16" fill="#1e293b" stroke="#475569"/>
+    <text x="290" y="158" class="box-title">ConversionCoordinator</text>
+    <text x="290" y="189" class="box-text">проверка типа</text>
+    <text x="290" y="213" class="box-text">выбор стратегии</text>
+    <text x="290" y="237" class="box-text">очистка при ошибке</text>
+    <text x="290" y="266" class="tag">актор + async/await</text>
+  </g>
+
+  <path d="M514 208 H542" class="flow"/>
+
+  <g filter="url(#shadow)">
+    <rect x="552" y="124" width="264" height="168" rx="16" fill="#1e293b" stroke="#475569"/>
+    <text x="572" y="158" class="box-title">OutputURLAllocator</text>
+    <text x="572" y="189" class="box-text">резервирование в памяти</text>
+    <text x="572" y="213" class="box-text">проверка существующих файлов</text>
+    <text x="572" y="237" class="box-text">безопасный числовой суффикс</text>
+    <text x="572" y="266" class="tag">report.txt → report-2.txt</text>
+  </g>
+
+  <path d="M816 208 H844" class="flow"/>
+
+  <g filter="url(#shadow)">
+    <rect x="854" y="145" width="254" height="126" rx="16" fill="#164e63" stroke="#22d3ee"/>
+    <text x="874" y="178" class="box-title">Атомарный результат</text>
+    <text x="874" y="207" class="box-text">временная область → moveItem</text>
+    <text x="874" y="230" class="tag">никаких частичных файлов</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="270" y="354" width="546" height="92" rx="16" fill="#312e81" stroke="#818cf8"/>
+    <text x="294" y="388" class="box-title">ConversionStrategy</text>
+    <text x="294" y="416" class="box-text">единый контракт · проверка типов · запись только во временный URL</text>
+  </g>
+  <path d="M392 292 V344" class="flow"/>
+  <path d="M684 354 V302" class="flow"/>
+</svg>
